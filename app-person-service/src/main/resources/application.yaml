@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:2411/person-db
+    username: TO_BE_OVERRIDDEN
+    password: TO_BE_OVERRIDDEN
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  main:
+    banner-mode: off
+  mvc:
+    problemdetails:
+      enabled: true
+springdoc:
+  show-actuator: true
+
