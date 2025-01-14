@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: docker_pg_person
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - "5432:5432"
+
+  app_person:
+    build:
+      context: ./app-person-service
+    container_name: app_person
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+
+  app_account:
+    build:
+      context: ./app-account-service
+    container_name: app_account
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
